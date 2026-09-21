@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sustainability Report</title>
+<style>
+  :root{
+    --bg:#e9f4f0;
+    --card:#ffffff;
+    --ink:#142a23;
+    --ink-soft:#5f716c;
+    --green:#1e9e57;
+    --green-soft:#e3f5e8;
+    --amber-bg:#fcefcb;
+    --amber-ink:#8a6a16;
+    --amber-line:#f5dfa4;
+    --amber-tint:#fffaf0;
+    --red-bg:#fbdedd;
+    --red-ink:#c9302c;
+    --link:#1f6fd0;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    background:#dfeeee;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    padding:24px 16px calc(24px + env(safe-area-inset-bottom,0px));
+    padding-top:calc(24px + env(safe-area-inset-top,0px));
+  }
+  .phone{
+    width:100%;max-width:390px;
+    background:var(--bg);
+    border-radius:38px;
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    box-shadow:0 18px 50px rgba(14,54,44,.16), 0 2px 6px rgba(14,54,44,.08);
+  }
+  @media (max-width:430px){
+    body{padding:0}
+    .phone{border-radius:0;min-height:100vh;box-shadow:none;max-width:none}
+  }
+
+  .status{display:flex;align-items:center;justify-content:space-between;padding:10px 20px 2px;font-size:13px;font-weight:600}
+  .status .icons{display:flex;align-items:center;gap:5px}
+  .bars{display:flex;align-items:flex-end;gap:2px;height:11px}
+  .bars i{display:block;width:3px;background:var(--ink);border-radius:1px}
+  .bars i:nth-child(1){height:4px}.bars i:nth-child(2){height:6px}
+  .bars i:nth-child(3){height:8px}.bars i:nth-child(4){height:11px}
+  .batt{width:22px;height:11px;border:1.4px solid var(--ink);border-radius:3px;position:relative;padding:1.5px}
+  .batt::after{content:"";position:absolute;right:-4px;top:3px;width:2px;height:5px;background:var(--ink);border-radius:0 2px 2px 0}
+  .batt span{display:block;height:100%;width:85%;background:var(--ink);border-radius:1.5px}
+
+  .topbar{display:flex;align-items:center;gap:14px;padding:12px 20px 16px}
+  .back{border:0;background:none;padding:0;cursor:pointer;line-height:0;color:var(--ink)}
+  .topbar h1{margin:0;font-size:17px;font-weight:600;letter-spacing:-.2px}
+
+  .scroll{padding:0 16px 26px;display:flex;flex-direction:column;gap:14px}
+
+  .card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 1px 3px rgba(16,40,32,.05)}
+  .card.flagged{background:var(--amber-tint);border:1px solid var(--amber-line)}
+
+  .head{display:flex;align-items:flex-start;gap:12px}
+  .badge-icon{flex:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .badge-icon.green{background:var(--green)}
+  .badge-icon.mint{background:var(--green-soft)}
+  .badge-icon.warn{background:var(--amber-bg)}
+  .head .titles{flex:1;min-width:0}
+  .head h3{margin:0;font-size:15px;font-weight:600;line-height:1.35}
+
+  .status-row{display:flex;align-items:center;gap:9px;margin-top:8px}
+  .figure{font-size:21px;font-weight:700}
+  .pill{display:inline-block;padding:4px 11px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+  .pill.amber{background:var(--amber-bg);color:var(--amber-ink)}
+  .pill.green{background:var(--green-soft);color:#157f45}
+  .pill.red{background:var(--red-bg);color:var(--red-ink)}
+
+  .body-text{margin:12px 0 0;font-size:13.5px;line-height:1.55;color:var(--ink-soft);max-width:62ch}
+  .link{display:inline-block;margin-top:12px;font-size:13.5px;font-weight:500;color:var(--link);text-decoration:none}
+  .link:hover{text-decoration:underline}
+  .link:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:3px}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="status">
+    <span>9:41</span>
+    <span class="icons">
+      <span class="bars"><i></i><i></i><i></i><i></i></span>
+      <svg width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true">
+        <path d="M7.5 10.2 9.2 8.4a2.5 2.5 0 0 0-3.4 0l1.7 1.8Z" fill="#142a23"/>
+        <path d="M3.6 6.3a5.7 5.7 0 0 1 7.8 0M1.2 3.7a9.2 9.2 0 0 1 12.6 0" stroke="#142a23" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span class="batt"><span></span></span>
+    </span>
+  </div>
+
+  <div class="topbar">
+   <a href="1-verification-results.html" class="back" aria-label="Go back">
+  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 12H5M11 18l-6-6 6-6"/>
+  </svg>
+</a>
+    <h1>Sustainability Report</h1>
+  </div>
+
+  <div class="scroll">
+
+    <!-- Natural / Plant-derived Ingredients -->
+    <section class="card">
+      <div class="head">
+        <span class="badge-icon mint" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#1e9e57">
+            <path d="M20 3c-7 0-13 3-14 10-.3 2 .3 4 1.6 5.4l1.5-1.5C8 13 11.5 9.7 16 8.6 12.3 10.6 9.6 13.6 8.4 18.2c1.2.6 2.6.8 4 .5C18.6 17.5 20.5 10.7 20 3Z"/>
+          </svg>
+        </span>
+        <div class="titles">
+          <h3>Natural / Plant-derived<br>Ingredients</h3>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="figure">70%</span>
+        <span class="pill amber">Partially Verified</span>
+      </div>
+      <p class="body-text">7 out of 10 ingredients classified as natural/plant-derived based on our reference criteria.</p>
+      <a class="link" href="3-ingredient-detail.html">View details</a>
+    </section>
+
+    <!-- Sustainable Packaging -->
+    <section class="card">
+      <div class="head">
+        <span class="badge-icon mint" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1e9e57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 19H4.8a1.8 1.8 0 0 1-1.5-2.7l2-3.3"/>
+            <path d="m9.2 5.6 1.3-2.2a1.8 1.8 0 0 1 3 0l3.6 6"/>
+            <path d="M14 19h5.2a1.8 1.8 0 0 0 1.5-2.7L18.5 13"/>
+            <path d="m7 19 2-2.5M9 5.5 6.5 9.8M18.6 13.2 16 14.6"/>
+          </svg>
+        </span>
+        <div class="titles">
+          <h3>Sustainable Packaging</h3>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="pill green">Verified</span>
+      </div>
+      <p class="body-text">Packaging claims match certification records.</p>
+      <a class="link" href="#">View details</a>
+    </section>
+
+    <!-- Eco-friendly Claim -->
+    <section class="card flagged">
+      <div class="head">
+        <span class="badge-icon warn" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d09a1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.3 3.9 2.4 17.1A1.9 1.9 0 0 0 4 20h16a1.9 1.9 0 0 0 1.6-2.9L13.7 3.9a1.9 1.9 0 0 0-3.4 0Z"/>
+            <path d="M12 9v4M12 17h.01"/>
+          </svg>
+        </span>
+        <div class="titles">
+          <h3>Eco-friendly Claim</h3>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="pill red">Not Verified</span>
+      </div>
+      <p class="body-text">No supporting certification or evidence found for this claim.</p>
+      <a class="link" href="#">View details</a>
+    </section>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Verification Results</title>
+<style>
+  :root{
+    --bg:#e9f4f0;
+    --card:#ffffff;
+    --ink:#142a23;
+    --ink-soft:#6b7c77;
+    --green:#1e9e57;
+    --green-deep:#157f45;
+    --green-btn:#1aa356;
+    --track:#e4e8e6;
+    --amber-bg:#fcefcb;
+    --amber-ink:#8a6a16;
+    --red:#e0413c;
+    --line:#eef1f0;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    background:#dfeeee;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    padding:24px 16px calc(24px + env(safe-area-inset-bottom,0px));
+    padding-top:calc(24px + env(safe-area-inset-top,0px));
+  }
+  .phone{
+    width:100%;max-width:390px;
+    background:var(--bg);
+    border-radius:38px;
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    box-shadow:0 18px 50px rgba(14,54,44,.16), 0 2px 6px rgba(14,54,44,.08);
+  }
+  @media (max-width:430px){
+    body{padding:0}
+    .phone{border-radius:0;min-height:100vh;box-shadow:none;max-width:none}
+  }
+
+  /* status bar */
+  .status{display:flex;align-items:center;justify-content:space-between;padding:10px 20px 2px;font-size:13px;font-weight:600}
+  .status .icons{display:flex;align-items:center;gap:5px}
+  .bars{display:flex;align-items:flex-end;gap:2px;height:11px}
+  .bars i{display:block;width:3px;background:var(--ink);border-radius:1px}
+  .bars i:nth-child(1){height:4px}.bars i:nth-child(2){height:6px}
+  .bars i:nth-child(3){height:8px}.bars i:nth-child(4){height:11px}
+  .batt{width:22px;height:11px;border:1.4px solid var(--ink);border-radius:3px;position:relative;padding:1.5px}
+  .batt::after{content:"";position:absolute;right:-4px;top:3px;width:2px;height:5px;background:var(--ink);border-radius:0 2px 2px 0}
+  .batt span{display:block;height:100%;width:85%;background:var(--ink);border-radius:1.5px}
+
+  /* header */
+  .topbar{display:flex;align-items:center;gap:14px;padding:12px 20px 14px}
+  .back{border:0;background:none;padding:0;cursor:pointer;line-height:0;color:var(--ink)}
+  .topbar h1{margin:0;font-size:17px;font-weight:600;letter-spacing:-.2px}
+
+  .scroll{padding:0 16px 28px;display:flex;flex-direction:column;gap:14px}
+
+  /* product */
+  .product{display:flex;align-items:center;gap:16px;padding:4px 6px 6px}
+  .product .thumb{width:62px;height:82px;display:flex;align-items:center;justify-content:center;flex:none}
+  .product h2{margin:0;font-size:17px;font-weight:600}
+  .product p{margin:3px 0 0;font-size:13px;color:var(--ink-soft)}
+
+  .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 1px 3px rgba(16,40,32,.05)}
+  .card h3{margin:0 0 6px;font-size:16px;font-weight:600}
+
+  /* overall result */
+  .overall{display:flex;flex-direction:column;align-items:center;text-align:center}
+  .overall h3{align-self:flex-start;margin-bottom:10px}
+  .ring{position:relative;width:104px;height:104px;margin:2px 0 4px}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:var(--green-deep)}
+  .overall .caption{font-size:13px;color:var(--ink-soft);margin:2px 0 10px}
+
+  .pill{display:inline-block;padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:600}
+  .pill.amber{background:var(--amber-bg);color:var(--amber-ink)}
+
+  /* claim summary */
+  .claims{list-style:none;margin:8px 0 0;padding:0}
+  .claims li{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .claims li:last-child{border-bottom:0;padding-bottom:2px}
+  .claims .name{flex:1}
+  .claims .meta{font-size:13px;font-weight:500;color:var(--green)}
+  .claims .meta.bad{color:var(--red)}
+  .dot{flex:none;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--green)}
+  .dot.bad{background:var(--red)}
+
+  .cta{margin-top:4px;display:flex;align-items:center;justify-content:center;gap:10px;display: flex;
+    text-decoration: none;color: white;background:var(--green-btn);color:#fff;border:0;border-radius:12px;
+    padding:15px 18px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;width:100%}
+  .cta:focus-visible{outline:3px solid #0d5c33;outline-offset:2px}
+
+  .homebar{margin:14px auto 10px;width:128px;height:5px;border-radius:99px;background:#0e2b22}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="status">
+    <span>9:41</span>
+    <span class="icons">
+      <span class="bars"><i></i><i></i><i></i><i></i></span>
+      <svg width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true">
+        <path d="M7.5 10.2 9.2 8.4a2.5 2.5 0 0 0-3.4 0l1.7 1.8Z" fill="#142a23"/>
+        <path d="M3.6 6.3a5.7 5.7 0 0 1 7.8 0M1.2 3.7a9.2 9.2 0 0 1 12.6 0" stroke="#142a23" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span class="batt"><span></span></span>
+    </span>
+  </div>
+
+  <div class="topbar">
+    <button class="back" aria-label="Go back">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M11 18l-6-6 6-6"/>
+      </svg>
+    </button>
+    <h1>Verification Results</h1>
+  </div>
+
+  <div class="scroll">
+
+    <div class="product">
+      <div class="thumb">
+        <svg width="54" height="80" viewBox="0 0 54 80" aria-hidden="true">
+          <rect x="20" y="2" width="14" height="9" rx="2" fill="#cfd8d4"/>
+          <rect x="10" y="10" width="34" height="68" rx="9" fill="#f2f6f3" stroke="#dbe4df"/>
+          <rect x="13" y="24" width="28" height="42" rx="5" fill="#eaf5ec" stroke="#cfe6d4"/>
+          <path d="M27 32c6 2 9 7 8 13-6 1-10-3-10-9 0-2 1-3 2-4Z" fill="#3fae63"/>
+          <path d="M25 34c-5 3-7 8-5 13 6 0 9-4 8-10 0-1-1-2-3-3Z" fill="#7cc98d"/>
+          <rect x="17" y="52" width="20" height="3" rx="1.5" fill="#bcd9c4"/>
+          <rect x="19" y="58" width="16" height="2.5" rx="1.25" fill="#d3e6d8"/>
+        </svg>
+      </div>
+      <div>
+        <h2>Herbal Shampoo</h2>
+        <p>XYZ Naturals</p>
+      </div>
+    </div>
+
+    <section class="card overall">
+      <h3>Overall Result</h3>
+      <div class="ring">
+        <!-- green arc = 1/3 of the circle (dasharray 92 of 276) -->
+        <svg width="104" height="104" viewBox="0 0 104 104">
+          <circle cx="52" cy="52" r="44" fill="none" stroke="#e4e8e6" stroke-width="10"/>
+          <circle cx="52" cy="52" r="44" fill="none" stroke="#1e9e57" stroke-width="10"
+                  stroke-linecap="round" stroke-dasharray="92 184"/>
+        </svg>
+        <span class="val">1/3</span>
+      </div>
+      <div class="caption">1/3 Claims verified</div>
+      <span class="pill amber">Partially Verified</span>
+    </section>
+
+    <section class="card">
+      <h3>Claim Summary</h3>
+      <ul class="claims">
+        <li>
+          <span class="dot">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span class="name">Natural / Plant-derived</span>
+          <span class="meta">70%</span>
+        </li>
+        <li>
+          <span class="dot">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span class="name">Sustainable Packaging</span>
+          <span class="meta">Verified</span>
+        </li>
+        <li>
+          <span class="dot bad">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </span>
+          <span class="name">Eco-friendly Claim</span>
+          <span class="meta bad">Not Verified</span>
+        </li>
+        <li>
+          <span class="dot">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span class="name">Certification</span>
+          <span class="meta">Valid</span>
+        </li>
+        <li>
+          <span class="dot">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span class="name">Product Coverage</span>
+          <span class="meta">Yes</span>
+        </li>
+      </ul>
+    </section>
+
+    <a href="2-sustainability-report.html" class="cta">
+  View Detailed Report
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12h14M13 6l6 6-6 6"/>
+  </svg>
+</a>
+
+    <div class="homebar"></div>
+  </div>
+</div>
+</body>
+</html>
