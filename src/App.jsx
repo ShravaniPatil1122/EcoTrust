@@ -4,6 +4,9 @@ import WelcomeScreen from './pages/WelcomeScreen';
 import ReadyToScanScreen from './pages/ReadyToScanScreen';
 import ProductFoundScreen from './pages/ProductFoundScreen';
 import ScanLabelScreen from './pages/ScanLabelScreen';
+import VerificationResultsScreen from './pages/VerificationResultsScreen';
+import SustainabilityReportScreen from './pages/SustainabilityReportScreen';
+import IngredientsScreen from './pages/IngredientsScreen';
 
 // Lazy-load camera scanner to keep initial bundle ultra-light
 const ScanBarcodeScreen = lazy(() => import('./pages/ScanBarcodeScreen'));
@@ -42,8 +45,19 @@ export default function App() {
         <Route path="/product/:barcode" element={<ProductFoundScreen />} />
         <Route path="/product-found" element={<ProductFoundScreen />} />
 
-        {/* Screen 5: Scan Label (Sustainability Claims OCR Preview) */}
+        {/* Screen 5: Optional Physical Label OCR Preview */}
         <Route path="/scan-label" element={<ScanLabelScreen />} />
+
+        {/* Screen 6: Verification Results */}
+        <Route path="/verification-results/:barcode" element={<VerificationResultsScreen />} />
+        <Route path="/verification-results" element={<VerificationResultsScreen />} />
+
+        {/* Screen 7: Sustainability Report */}
+        <Route path="/sustainability-report" element={<SustainabilityReportScreen />} />
+
+        {/* Screen 8: Natural / Plant-derived Ingredients */}
+        <Route path="/ingredients" element={<IngredientsScreen />} />
+        <Route path="/natural-ingredients" element={<Navigate to="/ingredients" replace />} />
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />

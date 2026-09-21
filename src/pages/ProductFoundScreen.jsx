@@ -162,15 +162,22 @@ export default function ProductFoundScreen() {
           </div>
         </div>
 
-        {/* Action Button: "Next: Scan Label →" (matching Screen 3 reference) */}
-        <div className="w-full pt-4">
+        {/* Action Button: "View Verification Results →" */}
+        <div className="w-full pt-4 space-y-2">
           <Button
-            onClick={handleNextScanLabel}
+            onClick={() => navigate('/verification-results', { state: { barcode: activeBarcode } })}
             variant="primary"
             showArrow={true}
           >
-            Next: Scan Label
+            Verify Claims
           </Button>
+          <button
+            onClick={handleNextScanLabel}
+            type="button"
+            className="w-full py-1.5 text-xs font-semibold text-slate-500 hover:text-emerald-800 transition-colors cursor-pointer"
+          >
+            Preview Physical Label OCR →
+          </button>
         </div>
       </div>
     </MobileContainer>

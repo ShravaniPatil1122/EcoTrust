@@ -89,11 +89,21 @@ export default function ScanLabelScreen() {
           </div>
         </div>
 
-        {/* Bottom Button: Return to Ready to Scan or verification */}
+        {/* Bottom Button: Proceed to Verification Results */}
         <div className="w-full pt-4 space-y-2">
-          <Button onClick={() => navigate('/ready-to-scan')} variant="primary" showArrow={false}>
-            Scan Another Product
+          <Button
+            onClick={() => navigate('/verification-results', { state: { barcode: product?.gtin || '8901234567890' } })}
+            variant="primary"
+            showArrow={true}
+          >
+            Verify Claims
           </Button>
+          <button
+            onClick={() => navigate('/ready-to-scan')}
+            className="w-full py-2 text-xs font-semibold text-slate-500 hover:text-slate-800 cursor-pointer"
+          >
+            Scan Another Product
+          </button>
         </div>
       </div>
     </MobileContainer>
