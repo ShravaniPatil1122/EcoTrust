@@ -4,15 +4,7 @@ import MobileContainer from '../components/common/MobileContainer';
 import BrandHeader from '../components/common/BrandHeader';
 import Button from '../components/common/Button';
 import { getProductByBarcode } from '../data/products';
-import {
-  Sparkles,
-  ShieldCheck,
-  CheckCircle2,
-  Leaf,
-  Info,
-  ArrowLeft,
-  RotateCcw,
-} from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 export default function IngredientsScreen() {
   const navigate = useNavigate();
@@ -21,11 +13,7 @@ export default function IngredientsScreen() {
   const product = getProductByBarcode(activeBarcode);
 
   const handleBack = () => {
-    navigate('/sustainability-report', { state: { barcode: activeBarcode } });
-  };
-
-  const handleScanAnother = () => {
-    navigate('/ready-to-scan');
+    navigate('/verification-results', { state: { barcode: activeBarcode } });
   };
 
   return (
@@ -35,7 +23,8 @@ export default function IngredientsScreen() {
         <div className="-mx-6">
           <BrandHeader
             showBack={true}
-            backTo="/sustainability-report"
+            onBack={handleBack}
+            backTo={`/verification-results/${activeBarcode}`}
             title="Natural Ingredients"
             showLogo={false}
           />
@@ -143,18 +132,11 @@ export default function IngredientsScreen() {
           </div>
         </div>
 
-        {/* Action Buttons */}
+        {/* Action Button: Return to Dashboard */}
         <div className="w-full pt-4 space-y-2">
-          <Button onClick={handleScanAnother} variant="primary" showArrow={false}>
-            Scan Another Product
+          <Button onClick={handleBack} variant="primary" showArrow={false}>
+            Back to Verification Results
           </Button>
-          <button
-            onClick={handleBack}
-            className="w-full py-2 text-xs font-semibold text-slate-500 hover:text-slate-800 cursor-pointer flex items-center justify-center gap-1.5"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Back to Sustainability Report</span>
-          </button>
         </div>
       </div>
     </MobileContainer>

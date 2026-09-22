@@ -6,6 +6,7 @@ import BrandLogo from './BrandLogo';
 export default function BrandHeader({
   showBack = false,
   backTo = null,
+  onBack = null,
   title = null,
   showLogo = true,
   rightAction = null,
@@ -14,7 +15,9 @@ export default function BrandHeader({
   const navigate = useNavigate();
 
   const handleBack = () => {
-    if (backTo) {
+    if (onBack) {
+      onBack();
+    } else if (backTo) {
       navigate(backTo);
     } else {
       navigate(-1);
