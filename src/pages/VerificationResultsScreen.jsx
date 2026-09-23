@@ -22,6 +22,14 @@ export default function VerificationResultsScreen() {
   const activeBarcode = barcode || location.state?.barcode || '8901234567890';
   const product = getProductByBarcode(activeBarcode);
 
+  const handleBack = () => {
+    if (location.state?.from) {
+      navigate(location.state.from);
+    } else {
+      navigate(`/product/${activeBarcode}`);
+    }
+  };
+
   // Animated ring state
   const [animatedOffset, setAnimatedOffset] = useState(301.6);
   const score = product?.score || 85;
@@ -119,7 +127,8 @@ export default function VerificationResultsScreen() {
         <div className="-mx-6">
           <BrandHeader
             showBack={true}
-            backTo={`/product/${activeBarcode}`}
+            onBack={handleBack}
+            backTo={location.state?.from || `/product/${activeBarcode}`}
             title="Verification Dashboard"
             showLogo={false}
           />

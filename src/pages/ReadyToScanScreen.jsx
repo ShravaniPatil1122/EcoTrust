@@ -12,7 +12,6 @@ import {
   AlertCircle,
   XCircle,
   RefreshCw,
-  CheckCircle2,
   X,
   FileImage,
 } from 'lucide-react';
@@ -142,9 +141,9 @@ export default function ReadyToScanScreen() {
           aria-label="Upload Barcode Image"
         />
 
-        {/* Header with back navigation to Welcome and GreenCheck branding */}
+        {/* Header with back navigation to Home and EcoTrust branding */}
         <div className="-mx-6">
-          <BrandHeader showBack={true} backTo="/" showLogo={true} />
+          <BrandHeader showBack={true} backTo="/home" showLogo={true} />
         </div>
 
         {/* Center: Barcode illustration with scan frame */}
@@ -156,43 +155,59 @@ export default function ReadyToScanScreen() {
         <div className="flex flex-col items-center text-center z-10 space-y-3">
           {/* Heading */}
           <h1 className="text-[25px] sm:text-[27px] font-bold text-[#0F291E] tracking-tight leading-[1.2]">
-            Ready to Check a Product?
+            Scan a Product
           </h1>
 
           {/* Supporting text */}
-          <p className="text-[14px] sm:text-[14.5px] text-slate-500 font-normal leading-relaxed max-w-[300px]">
-            Scan the product barcode or upload an image to identify it and verify its sustainability claims.
+          <p className="text-[14px] text-slate-500 font-normal leading-relaxed max-w-[300px]">
+            Scan a product barcode or upload its packaging label to verify its sustainability claims.
           </p>
 
           {/* Helper text badge */}
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/60 text-[12px] font-medium select-none">
               <Info className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-              <span>Make sure the barcode is clearly visible.</span>
+              <span>Both methods lead to the same verification report</span>
             </div>
           </div>
 
-          {/* Action Options: 1. Scan with Camera & 2. Upload Barcode Image */}
+          {/* Action Options: 1. [ Scan Barcode ] & 2. [ Upload Product Label ] */}
           <div className="w-full space-y-2.5 pt-2">
-            {/* Option 1: Scan with Camera (Primary green pill button) */}
-            <Button
-              onClick={handleScanWithCamera}
-              variant="primary"
-              showArrow={true}
-              className="gap-2.5"
-            >
-              <Camera className="w-5 h-5 stroke-[2.2]" />
-              <span>Scan with Camera</span>
-            </Button>
+            {/* Method 1: Scan Barcode */}
+            <div className="space-y-1.5">
+              <Button
+                onClick={handleScanWithCamera}
+                variant="primary"
+                showArrow={true}
+                className="gap-2.5 h-[52px] text-[15.5px] font-bold shadow-md"
+              >
+                <Camera className="w-5 h-5 stroke-[2.2]" />
+                <span>Scan Barcode</span>
+              </Button>
+              <button
+                type="button"
+                onClick={handleOpenPicker}
+                className="text-xs font-semibold text-slate-500 hover:text-emerald-800 transition-colors cursor-pointer py-0.5"
+              >
+                or upload barcode image
+              </button>
+            </div>
 
-            {/* Option 2: Upload Barcode Image (Clearly visible secondary button) */}
+            {/* Visual 'or' separator */}
+            <div className="flex items-center gap-3 py-0.5">
+              <div className="flex-1 h-px bg-slate-200" />
+              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">or</span>
+              <div className="flex-1 h-px bg-slate-200" />
+            </div>
+
+            {/* Method 2: Upload Product Label */}
             <button
-              onClick={handleOpenPicker}
+              onClick={() => navigate('/scan-label', { state: { from: '/ready-to-scan' } })}
               type="button"
-              className="w-full h-[52px] sm:h-[54px] rounded-full border-2 border-emerald-700/25 hover:border-emerald-700/50 bg-white hover:bg-emerald-50/60 active:bg-emerald-100 text-[#166534] font-semibold text-[15.5px] tracking-wide flex items-center justify-center gap-2.5 shadow-sm transition-all duration-200 cursor-pointer select-none active:scale-[0.985]"
+              className="w-full h-[52px] sm:h-[54px] rounded-full border-2 border-emerald-700/25 hover:border-emerald-700/50 bg-white hover:bg-emerald-50/60 active:bg-emerald-100 text-[#166534] font-semibold text-[15.5px] tracking-wide flex items-center justify-center gap-2.5 shadow-xs transition-all duration-200 cursor-pointer select-none active:scale-[0.985]"
             >
               <Upload className="w-[19px] h-[19px] stroke-[2.4] text-emerald-700" />
-              <span>Upload Barcode Image</span>
+              <span>Upload Product Label</span>
             </button>
           </div>
 

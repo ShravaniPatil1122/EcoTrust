@@ -5,7 +5,7 @@ import BrandHeader from '../components/common/BrandHeader';
 import Button from '../components/common/Button';
 import HerbalShampooIllustration from '../components/illustrations/HerbalShampooIllustration';
 import { getProductByBarcode } from '../data/products';
-import { Package, ShieldCheck, AlertCircle, ArrowLeft } from 'lucide-react';
+import { Package, AlertCircle } from 'lucide-react';
 
 export default function ProductFoundScreen() {
   const navigate = useNavigate();
@@ -17,7 +17,9 @@ export default function ProductFoundScreen() {
   const product = getProductByBarcode(activeBarcode);
 
   const handleNextScanLabel = () => {
-    navigate('/scan-label', { state: { product, barcode: activeBarcode } });
+    navigate('/scan-label', {
+      state: { product, barcode: activeBarcode, from: `/product/${activeBarcode}` },
+    });
   };
 
   const handleBackToScan = () => {
@@ -162,14 +164,14 @@ export default function ProductFoundScreen() {
           </div>
         </div>
 
-        {/* Action Button: "View Verification Results →" */}
+        {/* Action Button: "Verify This Product" */}
         <div className="w-full pt-4 space-y-2">
           <Button
             onClick={() => navigate('/verification-results', { state: { barcode: activeBarcode } })}
             variant="primary"
             showArrow={true}
           >
-            Verify Claims
+            Verify This Product
           </Button>
           <button
             onClick={handleNextScanLabel}

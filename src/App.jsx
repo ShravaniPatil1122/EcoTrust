@@ -1,5 +1,9 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, ProtectedRoute, useAuth } from './context/AuthContext';
+import LoginScreen from './pages/LoginScreen';
+import HomeScreen from './pages/HomeScreen';
+import ProfileScreen from './pages/ProfileScreen';
 import WelcomeScreen from './pages/WelcomeScreen';
 import ReadyToScanScreen from './pages/ReadyToScanScreen';
 import ProductFoundScreen from './pages/ProductFoundScreen';
@@ -24,62 +28,185 @@ function ScannerFallback() {
   );
 }
 
+function IndexRoute() {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? <Navigate to="/home" replace /> : <Navigate to="/login" replace />;
+}
+
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Screen 1: Welcome */}
-        <Route path="/" element={<WelcomeScreen />} />
-        <Route path="/welcome" element={<Navigate to="/" replace />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Main App Entry: / */}
+          <Route path="/" element={<IndexRoute />} />
+          <Route path="/welcome" element={<WelcomeScreen />} />
 
-        {/* Screen 2: Ready to Scan */}
-        <Route path="/ready-to-scan" element={<ReadyToScanScreen />} />
+          {/* Authentication */}
+          <Route path="/login" element={<LoginScreen />} />
 
-        {/* Screen 3: Functional Camera Barcode Scanner */}
-        <Route
-          path="/scan-barcode"
-          element={
-            <Suspense fallback={<ScannerFallback />}>
-              <ScanBarcodeScreen />
-            </Suspense>
-          }
-        />
+          {/* Main Home Hub */}
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <HomeScreen />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Screen 4: Product Found */}
-        <Route path="/product/:barcode" element={<ProductFoundScreen />} />
-        <Route path="/product-found" element={<ProductFoundScreen />} />
+          {/* User Profile */}
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfileScreen />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Screen 5: Optional Physical Label OCR Preview */}
-        <Route path="/scan-label" element={<ScanLabelScreen />} />
+          {/* Barcode & Product Scanning Flow (Protected) */}
+          <Route
+            path="/ready-to-scan"
+            element={
+              <ProtectedRoute>
+                <ReadyToScanScreen />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Screen 6: Verification Results */}
-        <Route path="/verification-results/:barcode" element={<VerificationResultsScreen />} />
-        <Route path="/verification-results" element={<VerificationResultsScreen />} />
+          <Route
+            path="/scan-barcode"
+            element={
+              <ProtectedRoute>
+                <Suspense fallback={<ScannerFallback />}>
+                  <ScanBarcodeScreen />
+                </Suspense>
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Screen 7: Sustainability Report */}
-        <Route path="/sustainability-report" element={<SustainabilityReportScreen />} />
+          <Route
+            path="/product/:barcode"
+            element={
+              <ProtectedRoute>
+                <ProductFoundScreen />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/product-found"
+            element={
+              <ProtectedRoute>
+                <ProductFoundScreen />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Screen 8: Natural / Plant-derived Ingredients */}
-        <Route path="/ingredients" element={<IngredientsScreen />} />
-        <Route path="/natural-ingredients" element={<Navigate to="/ingredients" replace />} />
+          <Route
+            path="/scan-label"
+            element={
+              <ProtectedRoute>
+                <ScanLabelScreen />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Screen: Certification Details */}
-        <Route path="/certification-details/:certId" element={<CertificationDetailsScreen />} />
-        <Route path="/certification-details" element={<CertificationDetailsScreen />} />
+          {/* Verification Dashboard (Central Hub) */}
+          <Route
+            path="/verification-results/:barcode"
+            element={
+              <ProtectedRoute>
+                <VerificationResultsScreen />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/verification-results"
+            element={
+              <ProtectedRoute>
+                <VerificationResultsScreen />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Screen 9: Other Claims */}
-        <Route path="/other-claims" element={<OtherClaimsScreen />} />
+          {/* Verification Drill-down Pages */}
+          <Route
+            path="/ingredients"
+            element={
+              <ProtectedRoute>
+                <IngredientsScreen />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/natural-ingredients" element={<Navigate to="/ingredients" replace />} />
 
-        {/* Packaging Verification */}
-        <Route path="/packaging" element={<PackagingVerificationScreen />} />
-        <Route path="/packaging-verification" element={<PackagingVerificationScreen />} />
+          <Route
+            path="/certification-details/:certId"
+            element={
+              <ProtectedRoute>
+                <CertificationDetailsScreen />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/certification-details"
+            element={
+              <ProtectedRoute>
+                <CertificationDetailsScreen />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Screen 10: Sustainability Journey */}
-        <Route path="/sustainability-journey" element={<SustainabilityJourneyScreen />} />
+          <Route
+            path="/packaging"
+            element={
+              <ProtectedRoute>
+                <PackagingVerificationScreen />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/packaging-verification"
+            element={
+              <ProtectedRoute>
+                <PackagingVerificationScreen />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+          <Route
+            path="/other-claims"
+            element={
+              <ProtectedRoute>
+                <OtherClaimsScreen />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Preserved Standalone Verification Reports */}
+          <Route
+            path="/sustainability-report"
+            element={
+              <ProtectedRoute>
+                <SustainabilityReportScreen />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/sustainability-journey"
+            element={
+              <ProtectedRoute>
+                <SustainabilityJourneyScreen />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }

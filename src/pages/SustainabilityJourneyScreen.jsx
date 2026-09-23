@@ -151,7 +151,7 @@ export default function SustainabilityJourneyScreen() {
               <ShieldCheck className="w-4 h-4 stroke-[2.2]" />
             </div>
             <p className="text-[12px] text-emerald-950 font-medium leading-relaxed">
-              Every verified record on GreenCheck helps you make cleaner, greenwash-free shopping decisions.
+              Every verified record on EcoTrust helps you make cleaner, greenwash-free shopping decisions.
             </p>
           </div>
         </div>

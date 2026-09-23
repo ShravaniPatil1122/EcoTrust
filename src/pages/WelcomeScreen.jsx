@@ -9,7 +9,7 @@ export default function WelcomeScreen() {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate('/ready-to-scan');
+    navigate('/login');
   };
 
   return (
@@ -28,7 +28,7 @@ export default function WelcomeScreen() {
           </svg>
         </div>
 
-        {/* Top: GreenCheck Branding & Subtitle */}
+        {/* Top: EcoTrust Branding & Subtitle */}
         <div className="pt-2 flex flex-col items-center z-10">
           <BrandLogo showTagline={true} size="default" />
         </div>

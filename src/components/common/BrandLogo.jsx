@@ -1,12 +1,12 @@
 import React from 'react';
 
-export default function BrandLogo({ showTagline = true, size = 'default' }) {
+export default function BrandLogo({ showTagline = true, size = 'default', tagline = 'Verify before you trust.' }) {
   const isLarge = size === 'large';
 
   return (
     <div className="flex flex-col items-center select-none">
       <div className="flex items-center gap-2.5">
-        {/* Dual-leaf GreenCheck icon matching the reference design */}
+        {/* Dual-leaf EcoTrust icon matching the reference design */}
         <div className="relative w-8 h-8 flex items-center justify-center">
           <svg
             viewBox="0 0 40 40"
@@ -48,18 +48,14 @@ export default function BrandLogo({ showTagline = true, size = 'default' }) {
           }`}
           style={{ letterSpacing: '-0.02em' }}
         >
-          GreenCheck
+          EcoTrust
         </span>
       </div>
 
-      {/* Subtitle matching the reference: "Scan · Verify · Choose Better" */}
+      {/* Subtitle: "Verify before you trust." */}
       {showTagline && (
         <p className="text-[13px] font-medium text-slate-500 tracking-normal mt-1 flex items-center gap-1.5">
-          <span>Scan</span>
-          <span className="text-slate-300 font-bold">·</span>
-          <span>Verify</span>
-          <span className="text-slate-300 font-bold">·</span>
-          <span>Choose Better</span>
+          {tagline}
         </p>
       )}
     </div>

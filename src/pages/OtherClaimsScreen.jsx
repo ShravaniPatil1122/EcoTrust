@@ -154,7 +154,7 @@ export default function OtherClaimsScreen() {
                   <span>Unsubstantiated Marketing Claim</span>
                 </p>
                 <p className="text-slate-600 leading-relaxed">
-                  Broad terms like "Eco-friendly" without a third-party lifecycle assessment (LCA) do not meet GreenCheck verification standards under ISO 14021 guidelines.
+                  Broad terms like "Eco-friendly" without a third-party lifecycle assessment (LCA) do not meet EcoTrust verification standards under ISO 14021 guidelines.
                 </p>
               </div>
             )}
